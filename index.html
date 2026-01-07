@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <!-- =======================
+         META / SEO
+    ======================== -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>saradavaz.ch – test</title>
+
+    <!-- =======================
+         STYLES
+    ======================== -->
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+
+  <body>
+
+    <!-- =======================
+         PRELOADER
+    ======================== -->
+    <div
+      id="preloader"
+      class="preloader"
+      role="status"
+      aria-live="polite"
+      aria-label="Seite lädt"
+    >
+      <div id="preTitle" class="pre-title">SARA DAVAZ</div>
+    </div>
+
+<!-- =======================
+     PROJECT OVERLAY (Start nach Preloader)
+======================== -->
+<div id="projectOverlay" class="project-overlay" hidden>
+  <!-- Hintergrundvideo -->
+  <video
+    class="project-overlay-video project-overlay-video--desktop"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
+    <source src="/assets/video/overlay_desktop.mp4" type="video/mp4" />
+  </video>
+
+  <video
+    class="project-overlay-video project-overlay-video--mobile"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
+    <source src="/assets/video/overlay_mobile.mp4" type="video/mp4" />
+  </video>
+
+  <div class="project-overlay-inner">
+    <div id="projectList" class="project-overlay-buttons">
+      <!-- JS fügt hier die Projekt-Buttons ein -->
+    </div>
+  </div>
+</div>
+
+
+    <!-- =======================
+         ABOUT OVERLAY („SARA DAVAZ“)
+    ======================== -->
+    <div id="overlay" class="overlay" hidden>
+      <div class="overlay-text">
+        <p>
+          I’m a graphic and multimedia designer based in Zurich, driven by a
+          passion for thoughtful, aesthetic design. Working in the creative
+          field since 2021, I’m currently expanding my skills through part-time
+          studies in Multimedia Production. I believe good design is both
+          beautiful and functional, and I find inspiration in simplicity and
+          the exploration of new visual perspectives.
+        </p>
+
+   <!-- About Buttons -->
+<div class="overlay-buttons">
+  <a href="mailto:info@saradavaz.ch" class="overlay-button">E-Mail</a>
+</div>
+
+
+        <!-- About Sections: Education / Experience / Volunteer work -->
+        <div class="about-sections">
+          <div class="about-block">
+            <h3>Education</h3>
+
+            <p>
+              <span class="about-year">09/2023–06/2027</span>
+              <span class="about-text"
+                >Bachelor of Science in Media Engineering,<br />HKB &amp; FHGR,
+                Zurich</span
+              >
+            </p>
+
+            <p>
+              <span class="about-year">08/2020–06/2021</span>
+              <span class="about-text"
+                >Propädeutikum, Kunstschule CLRW, Winterthur</span
+              >
+            </p>
+
+            <p>
+              <span class="about-year">08/2018–06/2019</span>
+              <span class="about-text"
+                >Gestalterische Berufsmaturität, Gewerbliche Berufsschule
+                Chur</span
+              >
+            </p>
+          </div>
+
+          <div class="about-block">
+            <h3>Experience</h3>
+
+            <p>
+              <span class="about-year">11/2024–present</span>
+              <span class="about-text"
+                >Graphic Designer, MADAI Brand Experience Agency, Zurich</span
+              >
+            </p>
+
+            <p>
+              <span class="about-year">01/2023–present</span>
+              <span class="about-text"
+                >Layout &amp; Graphic, Smart Media Agency, Zurich</span
+              >
+            </p>
+
+            <p>
+              <span class="about-year">07/2021–12/2022</span>
+              <span class="about-text"
+                >Marketing &amp; Graphic, von Salis Wein, Landquart</span
+              >
+            </p>
+          </div>
+
+          <div class="about-block">
+            <h3>Volunteer work</h3>
+
+            <p>
+              <span class="about-year">10/2022–present</span>
+              <span class="about-text"
+                >Creative Design, Verein Zurich Pride Festival, Zurich</span
+              >
+            </p>
+          </div>
+        </div>
+        <!-- Ende About Sections -->
+      </div>
+    </div>
+
+    <!-- =======================
+         FOOTER OVERLAY: DATENSCHUTZ
+    ======================== -->
+    <div id="overlay-datenschutz" class="overlay-blue" hidden>
+      <div class="overlay-content">
+        <p>
+          Alle Inhalte auf dieser Website sind von mir erstellt. Texte, Bilder
+          und Grafiken dürfen ohne meine Zustimmung nicht verwendet werden.
+          Externe Links wurden mit Sorgfalt gewählt – für deren Inhalte übernehme
+          ich keine Verantwortung.
+        </p>
+        <br />
+        <p>
+          Sara Davaz Graphic &amp; Multimedia Designerin 8048 Zürich
+        </p>
+      </div>
+    </div>
+
+    <!-- =======================
+         FOOTER OVERLAY: IMPRESSUM
+    ======================== -->
+    <div id="overlay-impressum" class="overlay-blue" hidden>
+      <div class="overlay-content">
+        <p>
+          Diese Website kommt ohne Cookies, Tracker oder Analyse-Tools aus. Wenn
+          du mir schreibst, verwende ich deine Angaben nur, um dir zu antworten.
+          Danach lösche ich sie wieder – ganz einfach.
+        </p>
+      </div>
+    </div>
+
+    <!-- =======================
+         HEADER
+    ======================== -->
+    <header>
+      <!-- Back-Pfeil (zur Project-Übersicht) -->
+      <button
+        id="backToProjects"
+        class="header-back"
+        aria-label="Back to project overview"
+        type="button"
+      >
+        <img src="assets/arrows/arrow-left.svg" alt="" />
+      </button>
+
+      <h1 id="siteTitle" class="clickable">SARA DAVAZ</h1>
+
+      <!-- Mobile-View-Toggle -->
+      <button
+        id="viewToggle"
+        class="view-toggle"
+        aria-label="Toggle project view"
+        aria-pressed="false"
+        type="button"
+      >
+        <img id="viewToggleIcon" src="assets/arrows/arrow-right.svg" alt="" />
+      </button>
+    </header>
+
+    <!-- =======================
+         MAIN (Projects werden per JS eingefügt)
+    ======================== -->
+    <main class="container" id="projectsContainer"></main>
+
+    <!-- =======================
+         FOOTER
+    ======================== -->
+    <footer id="footer">
+      <span id="footerDatenschutz" class="footer-left">Datenschutz</span>
+      <span id="footerImpressum" class="footer-right">Impressum</span>
+    </footer>
+
+    <!-- =======================
+         SCRIPTS
+    ======================== -->
+    <script src="js/script.js"></script>
+  </body>
+</html>

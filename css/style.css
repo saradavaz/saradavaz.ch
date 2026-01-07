@@ -1,0 +1,1081 @@
+/* =========================================================
+   ROOT / RESET / GLOBALS
+   ========================================================= */
+
+:root {
+  --bg: #0E0E0E;   /* Soft Black */
+  --text: #E7E7E3; /* Soft Warm White */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+
+  /* iOS Bounce / Pull-to-overscroll abschalten */
+  overscroll-behavior-y: none;
+}
+
+@media (min-width: 900px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   LAYOUT HELPERS
+   ========================================================= */
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  max-width: 1500px; /* ← dein gewünschter Seitenrand */
+}
+
+.project-info p,
+.info-sub,
+.info-right p,
+.info-created,
+.info-tags .tag {
+  line-height: 1.4;
+}
+
+/* Project Info Link – immer weiss, immer gleich */
+.project-info .project-link,
+.project-info .project-link:visited,
+.project-info .project-link:active {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.project-info .project-link:hover {
+  opacity: 0.7;
+}
+
+/* Abstand vor dem Link-CTA */
+.project-info p + p {
+  margin-top: 12px;
+}
+
+/* HARD OVERRIDE: Links dürfen nie grau werden */
+.project-info a,
+.project-info a:visited,
+.project-info a:active,
+.project-info a:focus,
+.project-info a:focus-visible,
+.project-info a:hover {
+  color: var(--text) !important;
+}
+
+
+
+/* =========================================================
+   BODY STATE / LOCKS
+   ========================================================= */
+
+body.preload-lock {
+  overflow: hidden;
+}
+
+body.overlay-lock {
+  overflow: hidden;
+}
+
+/* Project-Overlay-Modus: Body nicht scrollen */
+body.mode-project-list {
+  overflow: hidden;
+}
+
+/* Portfolio-Modus: Body wieder normal scrollen */
+body.mode-portfolio {
+  overflow: auto;
+}
+
+/* Für Datenschutz/Impressum Scroll blockieren */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Portfolio im Project-Overlay-Modus verstecken */
+body.mode-project-list #projectsContainer {
+  visibility: hidden;
+}
+
+/* Portfolio sichtbar + Platz unter dem Header */
+body.mode-portfolio #projectsContainer {
+  visibility: visible;
+  padding-top: 60px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+header {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 20000;
+  background: var(--bg);
+}
+
+#siteTitle {
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  margin-bottom: 0;
+  color: var(--text);
+
+  opacity: 0;
+  pointer-events: none;
+
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header-Titel bei About: perfekt zentrieren */
+#siteTitle.active {
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
+/* Wenn About-Overlay offen ist → X Close normal */
+#siteTitle.about-open {
+  font-weight: normal;
+}
+
+body.about-open #siteTitle {
+  font-weight: normal;
+}
+
+/* Header-Pfeile */
+.header-back,
+.view-toggle {
+  position: absolute;
+  bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.header-back img,
+.view-toggle img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.header-back {
+  left: 10px;
+}
+
+.view-toggle {
+  right: 10px;
+}
+
+/* Desktop: Toggle verstecken */
+@media (min-width: 900px) {
+  .header-back {
+    left: 10px !important;
+  }
+
+  .view-toggle {
+    display: none !important;
+  }
+}
+
+body.mode-project-list .header-back,
+body.mode-project-list .view-toggle {
+  display: none;
+}
+
+body.mode-portfolio .header-back {
+  display: flex;
+}
+
+body.mode-portfolio .view-toggle {
+  display: flex;
+}
+
+/* Header transparent, wenn Project Overlay geöffnet ist */
+body.mode-project-list header {
+  background: transparent !important;
+}
+
+body.mode-project-list.about-open header {
+  background: var(--bg) !important;
+}
+
+/* =========================================================
+   PROJECT LIST (Titelzeilen)
+   ========================================================= */
+
+.project-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  margin-bottom: 1px; /* soll 1px bleiben (dein Wunsch) */
+}
+
+.project-title {
+  font-weight: normal;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.info-toggle {
+  all: unset;
+  cursor: pointer;
+  font-weight: normal;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* =========================================================
+   PROJECT INFO (auf/zu)
+   ========================================================= */
+
+.project-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  padding: 0;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, height 0.4s ease, padding 0.4s ease;
+}
+
+/* Desktop: keine height/padding Animation → kein "schieben" */
+@media (min-width: 900px) {
+  .project-info {
+    transition: opacity 0.25s ease;
+  }
+}
+
+.project-info.show {
+  opacity: 1;
+  height: auto;
+  overflow: visible;
+  padding: 5px 0 20px;
+}
+
+.info-left,
+.info-right {
+  font-size: 14px;
+  flex: 1;
+}
+
+.info-left {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-right {
+  text-align: right;
+  max-width: 60%;
+}
+
+/* Desktop: max-width für Info rechts */
+@media (min-width: 900px) {
+  .info-right {
+    max-width: 20%;
+  }
+}
+
+.info-sub {
+  margin-bottom: 1rem;
+}
+
+.info-created {
+  margin-bottom: 0;
+}
+
+.info-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  align-items: flex-start;
+}
+
+.tag {
+  display: block;
+  background: none;
+  color: var(--text);
+  padding: 0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   PROJECT MEDIA (Bilder / Video)
+   ========================================================= */
+
+.project-media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px; /* Abstand zwischen Projekten (Bilder -> nächster Titel) */
+}
+
+/* Desktop: Cursor/Drag */
+@media (min-width: 900px) {
+  .project-media {
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .project-media.is-dragging {
+    cursor: grabbing;
+  }
+
+  /* verhindert Drag-ghost-image beim Ziehen */
+  .project-media img {
+    -webkit-user-drag: none; /* Safari/Chrome */
+  }
+}
+
+/* ---------- Bilder ---------- */
+
+.project-image {
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: #222;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* Desktop: horizontale Bildreihe */
+@media (min-width: 900px) {
+  .project-media {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    gap: 0;
+    padding: 0 0 20px 0;
+    margin-bottom: 30px;
+
+    scrollbar-width: none;
+  }
+
+  .project-media::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-image {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #222;
+    padding: 0;
+    width: auto;
+    height: auto;
+  }
+
+  .project-image img {
+    width: auto;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain !important;
+  }
+
+  body.view-horizontal .project-media {
+    flex-direction: row !important;
+  }
+}
+
+/* Desktop: Bilder NICHT zuschneiden (100% natürlich) */
+@media (min-width: 900px) {
+  .project-image img {
+    width: auto !important;
+    height: auto !important;
+    max-height: 600px !important; /* dein Desktop max-height */
+    object-fit: contain !important;
+  }
+
+  .project-media {
+    overflow-x: auto;
+    overflow-y: visible !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* =========================================================
+   MOBILE: HORIZONTAL VIEW
+   ========================================================= */
+
+@media (max-width: 899px) {
+  body.view-horizontal .project-media {
+    flex-direction: row;
+    align-items: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 60px;
+    scrollbar-width: none;
+
+    touch-action: pan-x;
+  }
+
+  body.view-horizontal .project-media::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.view-horizontal .project-image {
+    flex: 0 0 auto;
+    height: 260px;
+    width: auto;
+    background: #222;
+  }
+
+  body.view-horizontal .project-image img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+  }
+
+  /* MOBILE – Abstand zwischen Projekten (horizontal view) */
+  body.view-horizontal .project-section {
+    margin-top: 40px; /* ← HIER einstellen */
+  }
+}
+
+/* Zusätzlicher Mobile Fix (Originalverhalten beibehalten) */
+@media (max-width: 899px) {
+  body.view-horizontal .project-image img {
+    width: auto;
+    height: 260px;
+    max-height: none !important;
+    object-fit: cover;
+  }
+
+  body:not(.view-horizontal) .project-image img {
+    width: 100%;
+    height: auto;
+    max-height: none !important;
+    object-fit: contain;
+  }
+}
+
+/* =========================================================
+   PROJECT OVERLAY
+   ========================================================= */
+
+.project-overlay {
+  position: fixed;
+  inset: 0; /* FULLSCREEN */
+  background: var(--bg);
+  color: var(--text);
+  z-index: 15000; /* ÜBER Footer + Header */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  overflow: hidden; /* Footer kann nicht durchscheinen */
+}
+
+.project-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.project-overlay-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.project-overlay-video--mobile {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .project-overlay-video--desktop {
+    display: none;
+  }
+
+  .project-overlay-video--mobile {
+    display: block;
+  }
+}
+
+.project-overlay-inner {
+  position: relative; /* WICHTIG */
+  z-index: 1; /* über Video */
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px 10px 40px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.project-overlay-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.project-select-button {
+  border: none;
+  border-radius: 999px;
+  padding: 6px 20px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.project-select-button:hover {
+  opacity: 0.9;
+}
+
+.see-all-projects {
+  margin-top: 0px; /* Abstand zu Buttons */
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* =========================================================
+   ABOUT OVERLAY
+   ========================================================= */
+
+.overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 50px;
+  bottom: 0;
+  background: var(--bg);
+  color: var(--text);
+  z-index: 16000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  overflow-y: auto;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-text {
+  margin: 0 0 20px 0; /* NICHT zentrieren */
+  padding: 8px 10px; /* exakt dein Seitenrand */
+  width: 100%;
+  max-width: 80%; /* Text endet etwas nach Screen-Mitte */
+  text-align: left;
+}
+
+.overlay-text p {
+  line-height: 1.5;
+  font-size: 14px;
+  color: var(--text);
+}
+
+@media (min-width: 900px) {
+  .overlay-text {
+    max-width: 720px; /* dein Desktop max-width */
+    text-align: left;
+  }
+}
+
+/* About Buttons */
+.overlay-buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start; /* LINKS statt zentriert */
+}
+
+.overlay-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: auto;
+  align-self: flex-start;
+
+  padding: 6px 20px;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.overlay-button:hover {
+  opacity: 0.9;
+}
+
+/* About Sections */
+.about-sections {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 12px;
+}
+
+.about-block h3 {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.about-block p {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.about-year {
+  display: block;
+  font-weight: normal;
+}
+
+.about-text {
+  display: block;
+  margin-left: 20px;
+}
+
+/* =========================================================
+   FOOTER OVERLAYS (Datenschutz / Impressum)
+   ========================================================= */
+
+.overlay-blue {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 50px;
+  background: var(--bg);
+  color: var(--text);
+  z-index: 9998;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  overflow-y: auto;
+}
+
+.overlay-blue.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-blue .overlay-content {
+  margin: 20px 20px;
+  width: 90%;
+  max-width: 700px;
+}
+
+.overlay-blue p {
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--text);
+  white-space: pre-line;
+  font-weight: normal;
+}
+
+/* Overlay Padding (Mobile/Desktop) */
+@media (min-width: 900px) {
+  .overlay-blue .overlay-content {
+    margin-left: 20px !important;
+    margin-right: 20px !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .overlay-blue .overlay-content {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px 0px 10px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  position: relative;
+  z-index: 10;
+}
+
+.footer-left,
+.footer-right {
+  cursor: pointer;
+  font-weight: normal;
+}
+
+/* =========================================================
+   PRELOADER
+   ========================================================= */
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 500ms ease, visibility 500ms ease;
+}
+
+body.preload-lock header {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.preloader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.pre-title {
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  color: var(--text);
+  transform: translate3d(0, 0, 0);
+  will-change: transform, color;
+}
+
+.pre-title.animate {
+  transition: transform 900ms cubic-bezier(0.22, 0.8, 0.24, 1);
+}
+
+/* =========================================================
+   DESKTOP: Projekte sollen GANZ am Rand sein
+   ========================================================= */
+
+@media (min-width: 900px) {
+  .container {
+    max-width: none;
+    padding: 0 10px;
+  }
+
+  header,
+  footer {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .project-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .info-right {
+    padding-right: 0px;
+  }
+
+  .project-media {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+}
+
+/* =========================================================
+   PROJECT VIDEO – Square Preview + Modal
+   ========================================================= */
+
+.project-video {
+  width: 100%;
+  margin: 0 0 60px 0; /* gleich wie Projektbilder */
+}
+
+/* Horizontal View: weniger Abstand (Originalverhalten) */
+body.view-horizontal .project-video {
+  margin-bottom: 0;
+}
+
+body.view-horizontal .project-media {
+  margin-bottom: 0px; /* oder 0 */
+}
+
+/* eckige Ecken wirklich erzwingen */
+.project-video,
+.project-video * {
+  border-radius: 0 !important;
+}
+
+.project-video.is-square .youtube-crop {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Klickfläche */
+.project-video.is-square .youtube-click {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* iframe füllt den square Container komplett */
+.project-video.is-square .youtube-embed {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.8);
+  transform-origin: center;
+  border: 0;
+  pointer-events: none;
+}
+
+.project-video.is-square iframe {
+  opacity: 0.95;
+}
+
+.video-thumbnail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Custom Play Button (small, white) */
+.project-video.is-square .youtube-click::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 60px;
+  height: 60px;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 999px;
+  box-sizing: border-box;
+}
+
+.project-video.is-square .youtube-click::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-42%, -50%);
+  border-style: solid;
+  border-width: 15px 0 15px 22px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.9);
+}
+
+/* Optional: leichtes Hover-Feedback */
+.project-video.is-square .youtube-click:hover::after,
+.project-video.is-square .youtube-click:hover::before {
+  filter: brightness(1.1);
+}
+
+/* Modal für 16:9 Player */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 25000;
+  background: #000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+}
+
+.video-modal.show {
+  display: flex;
+}
+
+.video-modal-inner {
+  width: min(980px, 100%);
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.video-modal-inner iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-modal-close {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Während Video-Modal offen ist: alles darunter ausblenden */
+body.video-modal-open .project-overlay,
+body.video-modal-open .project-overlay-video {
+  visibility: hidden;
+}
+
+/* Mobile horizontal view: wie deine Bilder-Kacheln */
+@media (max-width: 899px) {
+  body.view-horizontal .project-video {
+    flex: 0 0 auto;
+    width: 260px;
+    margin: 0 !important;
+  }
+
+  body.view-horizontal .project-video.is-square .youtube-crop {
+    width: 260px;
+    height: 260px;
+    aspect-ratio: auto;
+  }
+
+  body.view-horizontal .project-media {
+    margin-bottom: 30px !important;
+    padding-bottom: 0px !important;
+  }
+
+  body.view-horizontal .project-image {
+    margin: 0 !important;
+  }
+
+  /* NUR vertikale Ansicht (also NICHT view-horizontal) */
+  body:not(.view-horizontal) .project-video {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* Desktop: square preview wie “grosses” Medium */
+@media (min-width: 900px) {
+  .project-video {
+    flex: 0 0 auto;
+    width: 600px; /* passt zu deinem max-height 600px */
+  }
+
+  .project-video.is-square .youtube-crop {
+    width: 600px;
+    height: 600px;
+    aspect-ratio: auto;
+  }
+}
+
+/* Wenn Handy im Landscape ist: Video grösser darstellen */
+@media (max-width: 899px) and (orientation: landscape) {
+  .video-modal {
+    padding: 0;
+  }
+
+  .video-modal-inner {
+    width: 100vw;
+    height: 100vh;
+    aspect-ratio: auto;
+  }
+
+  .video-modal-inner iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-modal-close {
+    top: 12px;
+    right: 12px;
+  }
+}

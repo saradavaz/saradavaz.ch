@@ -45,8 +45,9 @@ Gerade bei einem bewusst reduzierten Design erwiesen sich kleine Details als tec
 
 
 ### **KNOWN BUGS<br>**
-Zum aktuellen Stand sind folgende Bugs bekannt:
+Zum aktuellen Stand ist folgender Bug bekannt:
 In der mobilen Version bei horizontaler View rutscht die Seite leicht nach unten, wenn man ganz nach oben zieht (Overscroll-Verhalten). Dieser Effekt beeinträchtigt die Nutzung nur wenig, ich möchte dies aber in einer weiteren Überarbeitung genauer analysieren und verbessern.
+Darüber hinaus gibt es kleinere Optimierungspotenziale, beispielsweise bei der Performance des Hintergrundvideos oder bei Edge-Cases auf sehr kleinen Bildschirmhöhen.
 
 
 ### **LEARNINGS<br>**

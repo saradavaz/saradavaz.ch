@@ -45,9 +45,12 @@ Gerade bei einem bewusst reduzierten Design erwiesen sich kleine Details als tec
 
 
 ### **KNOWN BUGS<br>**
-Zum aktuellen Stand ist folgender Bug bekannt:
-In der mobilen Version bei horizontaler View rutscht die Seite leicht nach unten, wenn man ganz nach oben zieht (Overscroll-Verhalten). Dieser Effekt beeinträchtigt die Nutzung nur geringfügig, sollte aber in einer weiteren Iteration genauer analysiert und behoben werden.
-Darüber hinaus gibt es kleinere Optimierungspotenziale, beispielsweise bei der Performance des Hintergrundvideos oder bei Edge-Cases auf sehr kleinen Bildschirmhöhen.
+Zum aktuellen Stand sind folgende Bugs bekannt:
+In der mobilen Version bei horizontaler View rutscht die Seite leicht nach unten, wenn man ganz nach oben zieht (Overscroll-Verhalten). Dieser Effekt beeinträchtigt die Nutzung nur wenig, ich möchte dies aber in einer weiteren Überarbeitung genauer analysieren und verbessern.
+
+Ein weiterer Bug betrifft die geloopten Hintergrundvideos im Project-Overlay, welche derzeit nicht angezeigt werden. Trotz verschiedener Lösungsansätze konnte ich dieses Problem nicht beheben. Unter anderem habe ich versucht, die Videodateien zu komprimieren bzw. in ihrer Dateigrösse zu reduzieren, was jedoch keinen Einfluss auf das Verhalten hatte. Auffällig war zudem, dass die entsprechenden Videodateien im Web-FTP nicht im vorgesehenen Ordner auffindbar waren, obwohl sie lokal im Projekt (VS Code) korrekt eingebunden sind.
+Ein manueller Upload der Videos direkt über das Web-FTP schlug ebenfalls fehl, da hierbei wiederholt eine Fehlermeldung angezeigt wurde und der Upload nicht abgeschlossen werden konnte. Trotz intensiver Fehlersuche und mehrerer Versuche konnte ich keine funktionierende Lösung finden. Der Bug wurde daher bewusst dokumentiert und für eine zukünftige Weiterentwicklung vorgesehen.
+Aus gestalterischer Sicht ist dies besonders schade, da das Hintergrundvideo ursprünglich als zentrales visuelles Element im Project-Overlay konzipiert war und eines der gestalterischen Highlights der ansonsten bewusst sehr schlicht gehaltenen Website darstellen sollte. Das Problem möchte ich in einer künftigen Weiterentwicklung der Website definitiv noch beheben, für die Abgabe reichte die Zeit jedoch leider nicht mehr.
 
 
 ### **LEARNINGS<br>**

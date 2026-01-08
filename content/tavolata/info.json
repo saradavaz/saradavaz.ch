@@ -4,13 +4,16 @@
   "date": "March 2025",
   "tools": [
     "Adobe InDesign",
-    "Adobe Illustrator"
+    "Adobe Illustrator",
+    "Adobe Photoshop"
   ],
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed lorem non mi tincidunt consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed lorem non mi tincidunt consequat.",
+  "description": "Design concept for a Tavolata that brings people together around one table. The visual identity is reduced and timeless, balancing elegance and accessibility while creating space for cuisine, encounters, and shared experiences.",
   "images": [
     "tavolata_01.jpg",
     "tavolata_02.jpg",
+    "tavolata_05.jpg",
     "tavolata_03.jpg",
-    "tavolata_04.jpg"
+    "tavolata_04.jpg",
+    "tavolata_06.jpg"
   ]
 }
